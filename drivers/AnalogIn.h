@@ -24,6 +24,7 @@
 #include "hal/analogin_api.h"
 #include "platform/SingletonPtr.h"
 #include "platform/PlatformMutex.h"
+#include "RawSerial.h"
 
 namespace mbed {
 /** \addtogroup drivers */
@@ -60,6 +61,8 @@ public:
      */
     AnalogIn(PinName pin)
     {
+        RawSerial pc(USBTX, USBRX);
+        pc.printf("AnalogIn Created!");
         lock();
         analogin_init(&_adc, pin);
         unlock();
